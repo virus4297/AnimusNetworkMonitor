@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<String> status_ArrayList = new ArrayList<>();
     public ArrayList<String> ip_ArrayList = new ArrayList<>();
     public ArrayList<String> desc_ArrayList = new ArrayList<>();
-    public String ip,host,ipAddress;
+    public String ipAddress;
     public SQLiteDatabase database;
     public MyHelper helper=new MyHelper(this);
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public void print(String s){
         try{textView.append(s);}
         catch (Error|Exception e){
-            print("MainActivity41: "+e);
+            //print("MainActivity41: "+e);
             e.printStackTrace();
         }
     }
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             String ip = cursor.getString(1);
             String desc = cursor.getString(2);
             String status = cursor.getString(3);
-            stringBuilder.append("\nID:"+id+" IP"+ip+" DESC:"+desc+" STATUS:"+status);
+            stringBuilder.append("\nID:").append(id).append(" IP").append(ip).append(" DESC:").append(desc).append(" STATUS:").append(status);
             images_ArrayList.add("https://cdn.pixabay.com/photo/2020/03/19/04/58/coconut-trees-4946270_960_720.jpg");
             ip_ArrayList.add(ip);
             status_ArrayList.add(status);
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         return l;
     }
     //******************************************DATABASE**********************************************
-
+    //Dont delete this method updateListArray()
     public void updateListArray(ArrayList<String> ipAddress,ArrayList<String> status){
         this.ip_ArrayList=ipAddress;
         this.status_ArrayList =status;

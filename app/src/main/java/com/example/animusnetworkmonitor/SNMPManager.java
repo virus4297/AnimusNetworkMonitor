@@ -1,5 +1,7 @@
 package com.example.animusnetworkmonitor;
 
+import android.util.Log;
+
 import org.snmp4j.CommunityTarget;
 import org.snmp4j.PDU;
 import org.snmp4j.Snmp;
@@ -18,6 +20,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 //import snmp.commands.HexStrConver;
 //import java.sql.Connection;
@@ -123,8 +127,18 @@ public /*static*/ String snmp_main() throws Exception {
 	try {
 		 sysDescr11 = client.getAsString(new OID("1.3.6.1.2.1.1.1.0"));
 	}catch (Error|Exception e){
-		m.print(" for: "+address+"SNMPManager126 :"+e);
-		return "";
+
+//		m.runOnUiThread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				// Stuff that updates the UI
+//				m.print(" for: "+address+"SNMPManager126 :"+e.toString());
+//			}
+//		});
+		sysDescr11="SNMP Not Active";
+		Log.d(TAG, " for: "+address+"SNMPManager126 :"+e);
+		return sysDescr11;
 	}
 	final String toprint=sysDescr11+"sysDesc\n";
 	//System.out.println(sysDescr11+"sysDesc\n");
