@@ -2,6 +2,7 @@ package com.example.animusnetworkmonitor;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -49,26 +50,52 @@ public class MyHelper extends SQLiteOpenHelper {
         database.insert("DEVICES",null,values);
     }
 
-    /**
-     * Called when the database needs to be upgraded. The implementation
-     * should use this method to drop tables, add tables, or do anything else it
-     * needs to upgrade to the new schema version.
-     *
-     * <p>
-     * The SQLite ALTER TABLE documentation can be found
-     * <a href="http://sqlite.org/lang_altertable.html">here</a>. If you add new columns
-     * you can use ALTER TABLE to insert them into a live table. If you rename or remove columns
-     * you can use ALTER TABLE to rename the old table, then create the new table and then
-     * populate the new table with the contents of the old table.
-     * </p><p>
-     * This method executes within a transaction.  If an exception is thrown, all changes
-     * will automatically be rolled back.
-     * </p>
-     *
-     * @param db         The database.
-     * @param oldVersion The old database version.
-     * @param newVersion The new database version.
-     */
+    public Cursor getDataCursor(SQLiteDatabase database) {
+        //getData
+        Cursor cursor = database.rawQuery("SELECT _ID,IP,DESCRIPTION,STATUS FROM DEVICES", new String[]{});
+        return cursor;
+    }
+/*
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        //textView.append("Row Count:"+cursor.getCount()+"\n");
+        do {
+            int id = cursor.getInt(0);
+            String ip = cursor.getString(1);
+            String desc = cursor.getString(2);
+            String status = cursor.getString(3);
+            stringBuilder.append("\nID:" + id + " IP" + ip + " DESC:" + desc + " STATUS:" + status);
+            images_ArrayList.add("https://cdn.pixabay.com/photo/2020/03/19/04/58/coconut-trees-4946270_960_720.jpg");
+            ip_ArrayList.add(ip);
+            status_ArrayList.add(status);
+            desc_ArrayList.add(desc);
+            myDatasetcount++;
+        } while (cursor.moveToNext());
+        cursor.close();
+*/
+
+        /**
+         * Called when the database needs to be upgraded. The implementation
+         * should use this method to drop tables, add tables, or do anything else it
+         * needs to upgrade to the new schema version.
+         *
+         * <p>
+         * The SQLite ALTER TABLE documentation can be found
+         * <a href="http://sqlite.org/lang_altertable.html">here</a>. If you add new columns
+         * you can use ALTER TABLE to insert them into a live table. If you rename or remove columns
+         * you can use ALTER TABLE to rename the old table, then create the new table and then
+         * populate the new table with the contents of the old table.
+         * </p><p>
+         * This method executes within a transaction.  If an exception is thrown, all changes
+         * will automatically be rolled back.
+         * </p>
+         *
+         * @param db         The database.
+         * @param oldVersion The old database version.
+         * @param newVersion The new database version.
+         */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
